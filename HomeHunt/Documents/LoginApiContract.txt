@@ -1,0 +1,79 @@
+## Operation Summary ##
+
+Operation: Login
+Description: Authenticates a user by verifying their email and password credentials, returning a JSON Web Token (JWT) upon successful authentication. This operation supports the "Sign In" functionality for the house-rental API.
+HTTP Method: POST
+Path: /api/users/login
+
+
+## Request ##
+ # HTTP Method and Path #
+	- Method: POST
+	- Path: /api/users/login
+	- Headers: Content-Type: application/json
+## Body ##
+- Description: Contains the user’s email and password for authentication.
+
+- Schema: 
+{
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "The user's email address."
+    },
+    "password": {
+      "type": "string",
+      "description": "The user's password."
+    }
+  },
+  "required": ["email", "password"]
+}
+
+
+- Example:
+{
+  "email": "alex@example.com",
+  "password": "password123"
+}
+
+
+## Response ##
+
+- 200 OK: Authentication successful; returns a JWT for use in subsequent authenticated requests.
+
+example:
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+
+- 400 Bad Request:Invalid or missing request data.
+
+Happens when email or password is null or empty.
+
+
+- 401 Unauthorized: Authentication failed due to incorrect credentials.
+
+### Sample Request ####
+
+POST /api/users/login HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+  "email": "alex@example.com",
+  "password": "password123"
+}
+
+
+
+
+### Sample Response ###
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+
