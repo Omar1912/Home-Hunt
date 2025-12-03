@@ -1,19 +1,17 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
+# Azure DevOps Pipeline for GitHub Repo using Self-Hosted Agent
 trigger:
-- main
+  branches:
+    include:
+      - main  
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default   #self-hosted agent pool
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+# Checkout GitHub repo
+- checkout: self
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+# Example build step 
+- script: echo "Hello from self-hosted agent!"
+  displayName: 'Run a simple script'
